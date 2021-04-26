@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import authRoute from "./routes/auth.js";
 import bodyParser from "body-parser";
+import secretDataRoute from "./routes/secretDatas.js";
 
 //Configurations
 const app = express();
@@ -15,6 +16,7 @@ app.use(cors());
 
 //Route Middlewares
 app.use("/api/user", authRoute);
+app.use("/api/datas", secretDataRoute);
 app.use("/", (req, res) => {
   console.log("This is backend");
   res.send("Hello there!");

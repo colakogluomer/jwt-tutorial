@@ -1,6 +1,7 @@
 import express from "express";
 import User from "../models/User.js";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 const router = express.Router();
 
@@ -36,7 +37,8 @@ router.post("/login", async (req, res) => {
     if (!isPasswordCorrect)
       return res.status(400).json({ message: "Invalid credentials" });
 
-    res.send("logged in");
+    const token = jwt.sign({ _id: oldUser._id }, process.env.SECRET_KEY);
+    res.header("auth-token", token).send(token);
   } catch (err) {
     res.status(500).json({ message: "Something went wrong" });
   }
