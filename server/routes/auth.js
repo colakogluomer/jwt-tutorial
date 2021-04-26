@@ -1,46 +1,25 @@
 import express from "express";
-import User from "../models/User.js";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+import UserService from "../services/UserService.js";
 
 const router = express.Router();
 
 router.post("/register", async (req, res) => {
-  const { name, email, password, date } = req.body;
   try {
-    const hashedPassword = await bcrypt.hash(password, 12);
-    const user = await User.create({
-      name,
-      email,
-      password: hashedPassword,
-      date,
-    });
-
-    res.json(user);
+    const { name, email, password, date } = req.body;
+    const newUser = await UserService.register({ name, email, password, date });
+    res.json(newUser);
   } catch (error) {
-    // You can be change json's properties such as error.message
-    res.status(400).json(error);
+    res.status(400).json(error.message);
   }
 });
 
 router.post("/login", async (req, res) => {
-  const { email, password } = req.body;
-
   try {
-    const oldUser = await User.findOne({ email });
-
-    if (!oldUser)
-      return res.status(404).json({ message: "User doesn't exist" });
-
-    const isPasswordCorrect = await bcrypt.compare(password, oldUser.password);
-
-    if (!isPasswordCorrect)
-      return res.status(400).json({ message: "Invalid credentials" });
-
-    const token = jwt.sign({ _id: oldUser._id }, process.env.SECRET_KEY);
-    res.header("auth-token", token).send(token);
-  } catch (err) {
-    res.status(500).json({ message: "Something went wrong" });
+    const { email, password } = req.body;
+    const newUser = await UserService.login({ email, password });
+    res.json(newUser);
+  } catch (error) {
+    res.status(400).json(error.message);
   }
 });
 
