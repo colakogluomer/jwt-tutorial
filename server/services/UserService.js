@@ -14,9 +14,7 @@ class UserService {
     const isPasswordCorrect = await bcrypt.compare(password, oldUser.password);
     if (!isPasswordCorrect) throw new Error("Password is not correct");
     //If all controls are passed, we can create a token in order to use the session process.
-    const token = jwt.sign({ _id: oldUser._id }, process.env.SECRET_KEY, {
-      expiresIn: "1h",
-    });
+    const token = jwt.sign({ _id: oldUser._id }, process.env.SECRET_KEY);
     return token;
   }
   //Register process.
