@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 
 //req.header is checked by tokenVerify middleware then if all controls are passed,
-//it will return a verified response.
+//process will continue.
 const tokenVerify = (req, res, next) => {
   try {
     const token = req.header("auth-token");
