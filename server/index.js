@@ -5,6 +5,7 @@ import cors from "cors";
 import authRoute from "./routes/auth.js";
 import bodyParser from "body-parser";
 import secretDataRoute from "./routes/secretDatas.js";
+import errorHandling from "./middlewares/errorHandling.js";
 
 //Configurations
 const app = express();
@@ -18,9 +19,11 @@ app.use(cors());
 app.use("/api/user", authRoute);
 app.use("/api/datas", secretDataRoute);
 app.use("/", (req, res) => {
-  console.log("This is backend");
   res.send("Hello there!");
 });
+
+//Error Handling middleware
+app.use(errorHandling);
 
 //Connect to database and then server is listened
 const PORT = process.env.PORT;

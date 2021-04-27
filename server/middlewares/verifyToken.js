@@ -1,5 +1,7 @@
 import jwt from "jsonwebtoken";
 
+//req.header is checked by tokenVerify middleware then if all controls are passed,
+//it will return a verified response.
 const tokenVerify = (req, res, next) => {
   try {
     const token = req.header("auth-token");
@@ -8,7 +10,11 @@ const tokenVerify = (req, res, next) => {
     req.user = verified;
     next();
   } catch (error) {
-    res.status(400);
+    next({
+      errorName: error.name,
+      statusCode: 401,
+      errorMessage: error.message,
+    });
   }
 };
 
