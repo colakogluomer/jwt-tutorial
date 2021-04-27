@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 const tokenVerify = (req, res, next) => {
   try {
     const token = req.header("auth-token");
-    if (!token) return res.status(401).send("Denied");
+    if (!token) throw new Error("Access Denied");
     const verified = jwt.verify(token, process.env.SECRET_KEY);
     req.user = verified;
     next();
