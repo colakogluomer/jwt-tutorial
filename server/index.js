@@ -7,10 +7,9 @@ import bodyParser from "body-parser";
 import secretDataRoute from "./routes/secretDatas.js";
 import errorHandling from "./middlewares/errorHandling.js";
 
-//Configurations
+//Configurations and middlewares
 const app = express();
 dotenv.config();
-
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
@@ -18,8 +17,11 @@ app.use(cors());
 //Route Middlewares
 app.use("/api/user", authRoute);
 app.use("/api/datas", secretDataRoute);
-app.use("/", (req, res) => {
-  res.send("Hello there!");
+app.get("/", (req, res, next) => {
+  res.send("Hello there");
+});
+app.use((req, res, next) => {
+  res.send("404");
 });
 
 //Error Handling middleware
