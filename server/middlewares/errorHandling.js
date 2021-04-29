@@ -1,5 +1,6 @@
 //This is error handling middleware.
 const errorHandle = (err, req, res, next) => {
-  res.status(err.statusCode).json(err);
+  let { statusCode, message } = err;
+  res.status(statusCode).send(message);
 };
 export default errorHandle;
