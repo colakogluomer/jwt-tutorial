@@ -4,7 +4,7 @@ This project is developing with **best practices**. If you want to explore best 
 ## Installation
 ```
 git clone https://github.com/colakogluomer/nodejs-boilerplate.git
-cd jwt-tutorial
+cd nodejs-boilerplate
 cd server
 npm install
 ```
