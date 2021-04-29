@@ -23,3 +23,4 @@ nodemon start
 - PassportJS-JWT workflow
 - Token expiration
 - More HTTP Requests
+- Validation Middlewares
