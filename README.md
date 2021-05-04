@@ -19,8 +19,10 @@ CONNECTION_URI = YOUR MONGOOSE CONNECTION URI
 nodemon start
 ```
 
-##### TODOS
-- PassportJS-JWT workflow
+##### TODOS 
+:soon:
+- PassportJS-JWT workflow :white_check_mark:
 - Token expiration
 - More HTTP Requests
 - Validation Middlewares
+- Fix Folder Structure
