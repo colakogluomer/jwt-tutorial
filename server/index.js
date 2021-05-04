@@ -6,15 +6,21 @@ import authRoute from "./routes/auth.js";
 import bodyParser from "body-parser";
 import secretDataRoute from "./routes/secretDatas.js";
 import errorHandling from "./middlewares/errorHandling.js";
+import passport from "passport";
+import passportStrategy from "./config/passport.js";
 
 //Configurations and middlewares
 const app = express();
 dotenv.config();
+passportStrategy(passport);
+app.use(passport.initialize());
+
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
 //Route Middlewares
+
 app.use("/api/user", authRoute);
 app.use("/api/datas", secretDataRoute);
 app.get("/", (req, res, next) => {

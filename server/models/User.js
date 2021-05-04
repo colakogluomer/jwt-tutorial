@@ -16,7 +16,13 @@ const userSchema = new mongoose.Schema({
     maxLength: 255,
     validate: [validator.isEmail, "invalid email"],
   },
-  password: {
+  hash: {
+    type: String,
+    required: true,
+    maxLength: 1024,
+    minLength: 6,
+  },
+  salt: {
     type: String,
     required: true,
     maxLength: 1024,
