@@ -26,3 +26,4 @@ nodemon start
 - More HTTP Requests
 - Validation Middlewares
 - Fix Folder Structure
+- Implement Google Authentication
