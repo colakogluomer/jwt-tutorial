@@ -27,3 +27,4 @@ nodemon start
 - Validation Middlewares
 - Fix Folder Structure
 - Implement Google Authentication
+- Optimize Backend (Code Refactoring)
