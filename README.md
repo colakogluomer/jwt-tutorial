@@ -28,3 +28,4 @@ nodemon start
 - Fix Folder Structure
 - Implement Google Authentication
 - Optimize Backend (Code Refactoring)
+- Implement Test Configurations
