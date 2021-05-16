@@ -1,7 +1,7 @@
 import UserModel from "../models/User.js";
 import ApiError from "../utils/ApiError.js";
 import { generateToken } from "../utils/tokenGenerator.js";
-import { genPassword, validPassword } from "../utils/password.js";
+import { checkPassword, generatePassword } from "../utils/password.js";
 
 // I suggest that if you need constructor function, you can use classes.
 // I just tried class usage. If you want to use functions, you can use.
@@ -14,7 +14,7 @@ class UserService {
     const oldUser = await this.model.findOne({ email });
     if (!oldUser) throw new ApiError(404, "User does not exist");
     //Checking password.
-    const isPasswordCorrect = validPassword(
+    const isPasswordCorrect = checkPassword(
       password,
       oldUser.hash,
       oldUser.salt
@@ -31,11 +31,10 @@ class UserService {
     const checkUser = await this.model.findOne({ email });
     if (checkUser) throw new ApiError(409, "User already exist");
     //Hashing password due to provide security.
-    const saltHash = genPassword(password);
+    const saltHash = generatePassword(password);
     const salt = saltHash.salt;
     const hash = saltHash.hash;
     //If control is passed, we can create a new user.
-
     try {
       const newUser = await this.model.create({
         email,
@@ -44,10 +43,9 @@ class UserService {
         salt,
         date,
       });
-      console.log(newUser);
       return newUser;
     } catch (error) {
-      console.log(error);
+      throw new ApiError(404, "Something went wrong");
     }
   }
 }
