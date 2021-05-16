@@ -14,18 +14,25 @@ npm install
 PORT = YOUR PORT NUMBER
 CONNECTION_URI = YOUR MONGOOSE CONNECTION URI
 ```
+### And you have to write this command in your terminal because of generate your secret keys 
+```
+node generateKeyPair.js
+```
 #### Run
 ```
+npm install --save-dev nodemon
+or
+npm install -g nodemon
+
 nodemon start
 ```
 
 ##### TODOS 
 :soon:
 - PassportJS-JWT workflow :white_check_mark:
-- Token expiration
+- Fix Folder Structure :white_check_mark:
 - More HTTP Requests
 - Validation Middlewares
-- Fix Folder Structure
 - Implement Google Authentication
 - Optimize Backend (Code Refactoring)
 - Implement Test Configurations
