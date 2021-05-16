@@ -14,6 +14,10 @@ npm install
 PORT = YOUR PORT NUMBER
 CONNECTION_URI = YOUR MONGOOSE CONNECTION URI
 ```
+### And you have to write this command in your terminal because of generate your secret keys 
+```
+node generateKeyPair.js
+```
 #### Run
 ```
 nodemon start
