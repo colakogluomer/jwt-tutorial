@@ -20,6 +20,10 @@ node generateKeyPair.js
 ```
 #### Run
 ```
+npm install --save-dev nodemon
+or
+npm install -g nodemon
+
 nodemon start
 ```
 
