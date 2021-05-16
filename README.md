@@ -30,10 +30,9 @@ nodemon start
 ##### TODOS 
 :soon:
 - PassportJS-JWT workflow :white_check_mark:
-- Token expiration
+- Fix Folder Structure :white_check_mark:
 - More HTTP Requests
 - Validation Middlewares
-- Fix Folder Structure
 - Implement Google Authentication
 - Optimize Backend (Code Refactoring)
 - Implement Test Configurations
