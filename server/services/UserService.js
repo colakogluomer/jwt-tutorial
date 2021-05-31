@@ -1,7 +1,7 @@
 import UserModel from "../models/User.js";
 import ApiError from "../utils/ApiError.js";
 import { generateToken } from "../utils/tokenGenerator.js";
-import { checkPassword, generatePassword } from "../utils/password.js";
+import { checkPassword, generatePassword } from "../utils/passwordProcesses.js";
 
 // I suggest that if you need constructor function, you can use classes.
 // I just tried class usage. If you want to use functions, you can use.
