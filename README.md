@@ -1,4 +1,4 @@
-# JWT TUTORIAL
+# NodeJS Boilerplate
 This project is developing with **best practices**. If you want to explore best practices, you can check [this link](https://github.com/goldbergyoni/nodebestpractices/).
 
 ## Installation
