@@ -43,5 +43,7 @@ mongoose
     useCreateIndex: true,
   })
   .then(() => console.log("Connected to database"))
-  .then(() => app.listen(PORT, () => console.log("Server listening")))
+  .then(() =>
+    app.listen(PORT, () => console.log(`Server listening on ${PORT}`))
+  )
   .catch((error) => console.log(error.message));
