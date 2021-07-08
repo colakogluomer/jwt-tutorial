@@ -1,8 +1,5 @@
-import crypto from "crypto";
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import fs from "fs";
-const __dirname = dirname(fileURLToPath(import.meta.url));
+const crypto = require("crypto");
+const fs = require("fs");
 
 function genKeyPair() {
   const keyPair = crypto.generateKeyPairSync("rsa", {

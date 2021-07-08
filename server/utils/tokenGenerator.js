@@ -1,12 +1,10 @@
-import jsonwebtoken from "jsonwebtoken";
-import path, { dirname } from "path";
-import { fileURLToPath } from "url";
-import fs from "fs";
-const __dirname = dirname(fileURLToPath(import.meta.url));
+const jsonwebtoken = require("jsonwebtoken");
+const fs = require("fs");
+const path = require("path");
 const pathToKey = path.join(__dirname, "..", "id_rsa_priv.pem");
 const PRIV_KEY = fs.readFileSync(pathToKey, "utf8");
 
-export function generateToken(user) {
+function generateToken(user) {
   const _id = user._id;
   const expiresIn = "1d";
 
@@ -25,3 +23,4 @@ export function generateToken(user) {
     expires: expiresIn,
   };
 }
+module.exports.generateToken = generateToken;

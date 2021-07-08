@@ -1,6 +1,6 @@
-import express from "express";
+const express = require("express");
 const router = express.Router();
-import passport from "passport";
+const passport = require("passport");
 
 //Sample data.
 //req.header is checked by tokenVerify middleware before response returns
@@ -12,4 +12,4 @@ router.get(
   }
 );
 
-export default router;
+module.exports = router;

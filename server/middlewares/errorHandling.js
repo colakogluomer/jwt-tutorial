@@ -3,4 +3,4 @@ const errorHandle = (err, req, res, next) => {
   let { statusCode, message } = err;
   res.status(statusCode).send(message);
 };
-export default errorHandle;
+module.exports = errorHandle;

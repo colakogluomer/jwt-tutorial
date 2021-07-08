@@ -1,6 +1,6 @@
-import UserService from "../services/UserService.js";
+const UserService = require("../services/UserService");
 
-export const login = async (req, res, next) => {
+const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     const token = await UserService.login({ email, password });
@@ -10,7 +10,7 @@ export const login = async (req, res, next) => {
   }
 };
 
-export const register = async (req, res, next) => {
+const register = async (req, res, next) => {
   try {
     const { name, email, password, date } = req.body;
     const newUser = await UserService.register({ name, email, password, date });
@@ -19,3 +19,5 @@ export const register = async (req, res, next) => {
     next(error);
   }
 };
+module.exports.login = login;
+module.exports.register = register;

@@ -1,13 +1,13 @@
-import express from "express";
-import mongoose from "mongoose";
-import dotenv from "dotenv";
-import cors from "cors";
-import authRoute from "./routes/auth.js";
-import bodyParser from "body-parser";
-import secretDataRoute from "./routes/secretDatas.js";
-import errorHandling from "./middlewares/errorHandling.js";
-import passport from "passport";
-import passportStrategy from "./config/passport.js";
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const express = require("express");
+const cors = require("cors");
+const passport = require("passport");
+const authRoute = require("./routes/auth");
+const bodyParser = require("body-parser");
+const secretDataRoute = require("./routes/secretDatas");
+const errorHandling = require("./middlewares/errorHandling");
+const passportStrategy = require("./config/passport");
 
 //Configurations and middlewares
 const app = express();

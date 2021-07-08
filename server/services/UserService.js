@@ -1,42 +1,42 @@
-import UserModel from "../models/User.js";
-import ApiError from "../utils/ApiError.js";
-import { generateToken } from "../utils/tokenGenerator.js";
-import { checkPassword, generatePassword } from "../utils/passwordProcesses.js";
-
+const BaseService = require("./BaseService");
+const UserModel = require("../models/User");
+const ApiError = require("../utils/ApiError");
+const tokenGenerator = require("../utils/tokenGenerator");
+const passwordProcesses = require("../utils/passwordProcesses.js");
 // I suggest that if you need constructor function, you can use classes.
 // I just tried class usage. If you want to use functions, you can use.
-class UserService {
-  //We inject UserModel in order to use in this class
-  model = UserModel;
+class UserService extends BaseService {
   //Login process.
   async login({ email, password }) {
     //Checking user.
-    const oldUser = await this.model.findOne({ email });
+
+    const oldUser = await this.find({ email });
     if (!oldUser) throw new ApiError(404, "User does not exist");
     //Checking password.
-    const isPasswordCorrect = checkPassword(
+    const isPasswordCorrect = passwordProcesses.checkPassword(
       password,
       oldUser.hash,
       oldUser.salt
     );
     if (!isPasswordCorrect) throw new ApiError(404, "Password is not correct");
     //If all controls are passed, we can create a token in order to use the session process.
-    const token = generateToken(oldUser);
+    const token = tokenGenerator.generateToken(oldUser);
     return token;
   }
   //Register process.
   async register({ name, email, password, date }) {
     //console.log(date);
     //Controlling whether user already exists or not.
-    const checkUser = await this.model.findOne({ email });
+
+    const checkUser = await this.find({ email });
     if (checkUser) throw new ApiError(409, "User already exist");
     //Hashing password due to provide security.
-    const saltHash = generatePassword(password);
+    const saltHash = passwordProcesses.generatePassword(password);
     const salt = saltHash.salt;
     const hash = saltHash.hash;
     //If control is passed, we can create a new user.
     try {
-      const newUser = await this.model.create({
+      const newUser = await this.insert({
         email,
         name,
         hash,
@@ -50,4 +50,4 @@ class UserService {
   }
 }
 
-export default new UserService();
+module.exports = new UserService(UserModel);

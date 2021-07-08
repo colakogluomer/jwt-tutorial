@@ -1,13 +1,13 @@
-import crypto from "crypto";
+const crypto = require("crypto");
 
-export function checkPassword(password, hash, salt) {
+function checkPassword(password, hash, salt) {
   var hashVerify = crypto
     .pbkdf2Sync(password, salt, 10000, 64, "sha512")
     .toString("hex");
   return hash === hashVerify;
 }
 
-export function generatePassword(password) {
+function generatePassword(password) {
   var salt = crypto.randomBytes(32).toString("hex");
   var genHash = crypto
     .pbkdf2Sync(password, salt, 10000, 64, "sha512")
@@ -18,3 +18,6 @@ export function generatePassword(password) {
     hash: genHash,
   };
 }
+
+module.exports.checkPassword = checkPassword;
+module.exports.generatePassword = generatePassword;
