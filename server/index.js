@@ -8,6 +8,7 @@ const bodyParser = require("body-parser");
 const secretDataRoute = require("./routes/secretDatas");
 const errorHandling = require("./middlewares/errorHandling");
 const passportStrategy = require("./config/passport");
+const ApiError = require("./utils/ApiError");
 
 //Configurations and middlewares
 const app = express();
@@ -26,8 +27,8 @@ app.use("/api/datas", secretDataRoute);
 app.get("/", (req, res, next) => {
   res.send("Hello there");
 });
-app.use((req, res, next) => {
-  res.send("404");
+app.use(() => {
+  throw new ApiError(404, "Page Not Found.");
 });
 
 //Error Handling middleware
