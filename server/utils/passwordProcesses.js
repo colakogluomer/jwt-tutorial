@@ -19,5 +19,7 @@ function generatePassword(password) {
   };
 }
 
-module.exports.checkPassword = checkPassword;
-module.exports.generatePassword = generatePassword;
+module.exports = {
+  checkPassword,
+  generatePassword,
+};

@@ -19,5 +19,4 @@ const register = async (req, res, next) => {
     next(error);
   }
 };
-module.exports.login = login;
-module.exports.register = register;
+module.exports = { login, register };

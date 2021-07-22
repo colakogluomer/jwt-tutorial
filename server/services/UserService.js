@@ -1,5 +1,5 @@
 const BaseService = require("./BaseService");
-const UserModel = require("../models/User");
+const User = require("../models/User");
 const ApiError = require("../utils/ApiError");
 const tokenGenerator = require("../utils/tokenGenerator");
 const passwordProcesses = require("../utils/passwordProcesses.js");
@@ -10,8 +10,9 @@ class UserService extends BaseService {
   async login({ email, password }) {
     //Checking user.
 
-    const oldUser = await this.find({ email });
-    if (!oldUser) throw new ApiError(404, "User does not exist");
+    const oldUser = await this.find({ email: email });
+    console.log(oldUser);
+    if (oldUser == null) throw new ApiError(404, "User does not exist");
     //Checking password.
     const isPasswordCorrect = passwordProcesses.checkPassword(
       password,
@@ -28,7 +29,8 @@ class UserService extends BaseService {
     //console.log(date);
     //Controlling whether user already exists or not.
 
-    const checkUser = await this.find({ email });
+    const checkUser = await this.find({ email: email });
+    console.log(checkUser);
     if (checkUser) throw new ApiError(409, "User already exist");
     //Hashing password due to provide security.
     const saltHash = passwordProcesses.generatePassword(password);
@@ -50,4 +52,4 @@ class UserService extends BaseService {
   }
 }
 
-module.exports = new UserService(UserModel);
+module.exports = new UserService(User);

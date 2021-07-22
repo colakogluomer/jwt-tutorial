@@ -23,4 +23,4 @@ function generateToken(user) {
     expires: expiresIn,
   };
 }
-module.exports.generateToken = generateToken;
+module.exports = { generateToken };
