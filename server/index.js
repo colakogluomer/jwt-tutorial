@@ -3,9 +3,8 @@ const dotenv = require("dotenv");
 const express = require("express");
 const cors = require("cors");
 const passport = require("passport");
-const authRoute = require("./routes/auth");
+const userRoute = require("./routes/userRoute");
 const bodyParser = require("body-parser");
-const secretDataRoute = require("./routes/secretDatas");
 const errorHandling = require("./middlewares/errorHandling");
 const passportStrategy = require("./config/passport");
 const ApiError = require("./utils/ApiError");
@@ -22,8 +21,7 @@ app.use(cors());
 
 //Route Middlewares
 
-app.use("/api/user", authRoute);
-app.use("/api/datas", secretDataRoute);
+app.use("/api/user", userRoute);
 app.get("/", (req, res, next) => {
   res.send("Hello there");
 });

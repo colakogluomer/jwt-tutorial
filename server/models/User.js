@@ -32,6 +32,13 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  todos: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Todo",
+      autopopulate: { maxDepth: 2 },
+    },
+  ],
 });
-
+UserSchema.plugin(require("mongoose-autopopulate"));
 module.exports = mongoose.model("User", UserSchema);
