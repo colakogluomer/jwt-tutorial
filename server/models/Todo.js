@@ -4,7 +4,7 @@ const TodoSchema = new mongoose.Schema({
   author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
-    autopopulate: { maxDepth: 2 },
+    autopopulate: { maxDepth: 3 },
   },
   title: String,
   description: String,

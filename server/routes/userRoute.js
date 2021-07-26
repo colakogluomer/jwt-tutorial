@@ -7,6 +7,7 @@ const TodoService = require("../services/TodoService");
 router.post("/register", async (req, res, next) => {
   try {
     const { name, email, password, date } = req.body;
+    console.log(name);
     const newUser = await UserService.register({ name, email, password, date });
     res.send(newUser);
   } catch (error) {
@@ -25,11 +26,10 @@ router.post("/login", async (req, res, next) => {
 });
 router.get(
   "/:id/todos",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   async (req, res, next) => {
     try {
       const userId = req.params.id;
-      console.log(userId);
       const todos = await TodoService.findTodos(userId);
       res.send(todos);
     } catch (error) {
@@ -40,12 +40,17 @@ router.get(
 
 router.post(
   "/:id/todos/add",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   async (req, res, next) => {
     try {
       const userId = req.params.id;
-      const todo = req.body;
-      const createdTodo = await TodoService.addTodo(userId, todo);
+      const { author, title, description } = req.body;
+      const createdTodo = await TodoService.addTodo(
+        userId,
+        author,
+        title,
+        description
+      );
 
       res.send(createdTodo);
     } catch (error) {

@@ -5,11 +5,11 @@ class BaseService {
   save(objects) {
     return this.model.insertMany(objects);
   }
-  async find(object) {
-    return await this.model.findOne(object);
+  async find(id) {
+    return await this.model.findById(id);
   }
-  async findBy(prop, value) {
-    return await this.model.find({ [prop]: value });
+  async findBy(property, value) {
+    return await this.model.findOne({ [property]: value });
   }
   async insert(object) {
     return await this.model.create(object);

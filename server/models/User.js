@@ -36,7 +36,7 @@ const UserSchema = new mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Todo",
-      autopopulate: { maxDepth: 2 },
+      autopopulate: { maxDepth: 3 },
     },
   ],
 });

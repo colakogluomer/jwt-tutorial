@@ -4,11 +4,12 @@ const ApiError = require("../utils/ApiError");
 const userService = require("./UserService");
 
 class TodoService extends BaseService {
-  async addTodo(userId, todo) {
+  async addTodo(userId, author, title, description) {
     try {
-      const user = await userService.find({ _id: userId });
-
-      const createdTodo = await this.insert(todo);
+      console.log(userId);
+      const user = await userService.find(userId);
+      console.log(user);
+      const createdTodo = await this.insert({ author, title, description });
       user.todos.push(createdTodo);
       await user.save();
       return createdTodo;

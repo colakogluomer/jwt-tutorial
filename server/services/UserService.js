@@ -9,10 +9,8 @@ class UserService extends BaseService {
   //Login process.
   async login({ email, password }) {
     //Checking user.
-
-    const oldUser = await this.find({ email: email });
-    console.log(oldUser);
-    if (oldUser == null) throw new ApiError(404, "User does not exist");
+    const oldUser = await this.findBy("email", email);
+    if (!oldUser) throw new ApiError(404, "User does not exist");
     //Checking password.
     const isPasswordCorrect = passwordProcesses.checkPassword(
       password,
@@ -26,11 +24,8 @@ class UserService extends BaseService {
   }
   //Register process.
   async register({ name, email, password, date }) {
-    //console.log(date);
     //Controlling whether user already exists or not.
-
-    const checkUser = await this.find({ email: email });
-    console.log(checkUser);
+    const checkUser = await this.findBy("email", email);
     if (checkUser) throw new ApiError(409, "User already exist");
     //Hashing password due to provide security.
     const saltHash = passwordProcesses.generatePassword(password);
